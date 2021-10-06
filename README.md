@@ -1,9 +1,9 @@
 # group4
 
 <h1>Earthquake API</h1>
-<p><strong>ENVRI-FAIR International School 2021 - Work Group 4 - Assignment</strong>
-Earthquake data taken from: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson
-Tech stack: Express, Typescript, NodeJS
+<p><strong>ENVRI-FAIR International School 2021 - Work Group 4 - Assignment</strong></p>
+<p>Earthquake data taken from: https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/significant_month.geojson</p>
+<p>Tech stack: Express, Typescript, NodeJS
 </p>
 
 <h2>Development dependencies</h2>
