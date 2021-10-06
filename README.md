@@ -29,6 +29,6 @@ node index.js
 
 OR
 
-npm run start server
+npm start
 
-The server listens at http://localhost:3000. The app will automatically reload if you change any of the source files.
+The server listens at http://localhost:3000.
