@@ -9,7 +9,12 @@ const obj = JSON.parse(fs.readFileSync("data.json", "utf8"));
 let earthquakes = obj.features;
 let newEarthquakes = [];
 
-/* for (let earthquake in earthquakes) {
+app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+for (let earthquake of earthquakes) {
   let newEarthquake = {};
   newEarthquake.id = earthquake.id;
   newEarthquake.time = earthquake.properties.time;
@@ -17,15 +22,10 @@ let newEarthquakes = [];
   newEarthquake.magnitude = earthquake.properties.mag;
   newEarthquake.location = earthquake.properties.place;
 
-  //newEarthquakes[] = newEarthquake;
-} */
-app.use(cors());
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-
+  newEarthquakes.push(newEarthquake);
+}
 app.get("/earthquake", (req, res) => {
-  res.json(earthquakes);
+  res.json(newEarthquakes);
 });
 
 app.get("/earthquake/:id", (req, res) => {
@@ -33,7 +33,7 @@ app.get("/earthquake/:id", (req, res) => {
   const id = req.params.id;
 
   // searching books for the isbn
-  for (let earthquake of earthquakes) {
+  for (let earthquake of newEarthquakes) {
     if (earthquake.id === id) {
       res.json(earthquake);
       return;
@@ -44,22 +44,14 @@ app.get("/earthquake/:id", (req, res) => {
   res.status(404).send("Earthquake not found");
 });
 
-app.post("/earthquake/:id", (req, res) => {
+app.post("/earthquake", (req, res) => {
   // reading isbn from the URL
-  const id = req.params.id;
   const newEarthquake = req.body;
 
-  // remove item from the books array
-  for (let i = 0; i < earthquakes.length; i++) {
-    let earthquake = earthquakes[i];
+  newEarthquakes.push(newEarthquake);
 
-    if (earthquake.properties.ids === id) {
-      earthquakes[i].properties = newBook;
-    }
-  }
-
-  // sending 404 when not found something is a good practice
-  res.send("Earthquake is edited");
+  // sending is a good practice
+  res.send("Earthquake is added");
 });
 
 const port = 3000;
