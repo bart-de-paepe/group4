@@ -1,18 +1,30 @@
 const express = require("express");
 const app = express();
 const bodyParser = require("body-parser");
-const cors = require("cors");
-
 const fs = require("fs");
+// security addon
+const rateLimit = require("express-rate-limit");
+const helmet = require("helmet");
+
+
+
+// apply limiter to all requests
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100 // limit each IP to 100 requests per windowMs
+});
+
+
+// middleware
+app.use(limiter);
+app.use(helmet());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 const obj = JSON.parse(fs.readFileSync("data.json", "utf8"));
 
 let earthquakes = obj.features;
 let newEarthquakes = [];
-
-app.use(cors());
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 for (let earthquake of earthquakes) {
   let newEarthquake = {};
@@ -24,37 +36,61 @@ for (let earthquake of earthquakes) {
 
   newEarthquakes.push(newEarthquake);
 }
+
+// get all earthquake
 app.get("/earthquake", (req, res) => {
-  res.json(newEarthquakes);
+  res.status(200).json(newEarthquakes);
 });
 
+
+// get earthquake by id
 app.get("/earthquake/:id", (req, res) => {
-  // reading isbn from the URL
   const id = req.params.id;
 
-  // searching books for the isbn
   for (let earthquake of newEarthquakes) {
     if (earthquake.id === id) {
-      res.json(earthquake);
+      res.status(200).json(earthquake);
       return;
     }
   }
 
-  // sending 404 when not found something is a good practice
   res.status(404).send("Earthquake not found");
 });
 
+
+// modify an event 
+app.put("/earthquake/:id", (req,res) => {
+  const id = req.params.id;
+  let earthquake = newEarthquakes.find(earthquake => earthquake.id === id)
+  earthquake.time = req.body.time;
+  earthquake.coordinates = req.body.coordinates;
+  earthquake.magnitude = req.body.magnitude;
+  earthquake.location = req.body.location;
+  res.status(200).json(earthquake)
+});
+
+
+// delete an event 
+app.delete("/earthquake/:id", (req,res) => {
+  const id = req.params.id;
+  let earthquake = newEarthquakes.find(earthquake => earthquake.id === id);
+  newEarthquakes.splice(newEarthquakes.indexOf(earthquake),1);
+  res.status(200).json(newEarthquakes);
+});
+
+
+// create earthquake
 app.post("/earthquake", (req, res) => {
-  // reading isbn from the URL
   const newEarthquake = req.body;
 
   newEarthquakes.push(newEarthquake);
 
-  // sending is a good practice
-  res.send("Earthquake is added");
+  res.status(200).json({msg:"new earthquake added",newEarthquake});
 });
 
+
+//Publish api
 const port = 3000;
 app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`);
+  console.log(`Listening at http://localhost:${port}`);
 });
