@@ -6,14 +6,11 @@ const fs = require("fs");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 
-
-
 // apply limiter to all requests
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100 // limit each IP to 100 requests per windowMs
+  max: 100, // limit each IP to 100 requests per windowMs
 });
-
 
 // middleware
 app.use(limiter);
@@ -29,6 +26,7 @@ let newEarthquakes = [];
 for (let earthquake of earthquakes) {
   let newEarthquake = {};
   newEarthquake.id = earthquake.id;
+  newEarthquake.USGSid = earthquake.USGSid;
   newEarthquake.time = earthquake.properties.time;
   newEarthquake.coordinates = earthquake.geometry.coordinates;
   newEarthquake.magnitude = earthquake.properties.mag;
@@ -42,7 +40,6 @@ app.get("/earthquake", (req, res) => {
   res.status(200).json(newEarthquakes);
 });
 
-
 // get earthquake by USGSid
 app.get("/earthquake/:USGSid", (req, res) => {
   const USGSid = req.params.USGSid;
@@ -54,7 +51,7 @@ app.get("/earthquake/:USGSid", (req, res) => {
     }
   }
 
-  res.status(404).send("Earthquake not found");
+  res.status(404).send("Earthquake USGSid not found");
 });
 
 // get earthquake by id
@@ -68,30 +65,27 @@ app.get("/earthquake/:id", (req, res) => {
     }
   }
 
-  res.status(404).send("Earthquake not found");
+  res.status(404).send("Earthquake id not found");
 });
 
-
-// modify an event 
-app.put("/earthquake/:id", (req,res) => {
+// modify an event
+app.put("/earthquake/:id", (req, res) => {
   const id = req.params.id;
-  let earthquake = newEarthquakes.find(earthquake => earthquake.id === id)
+  let earthquake = newEarthquakes.find((earthquake) => earthquake.id === id);
   earthquake.time = req.body.time;
   earthquake.coordinates = req.body.coordinates;
   earthquake.magnitude = req.body.magnitude;
   earthquake.location = req.body.location;
-  res.status(200).json(earthquake)
+  res.status(200).json(earthquake);
 });
 
-
-// delete an event 
-app.delete("/earthquake/:id", (req,res) => {
+// delete an event
+app.delete("/earthquake/:id", (req, res) => {
   const id = req.params.id;
-  let earthquake = newEarthquakes.find(earthquake => earthquake.id === id);
-  newEarthquakes.splice(newEarthquakes.indexOf(earthquake),1);
+  let earthquake = newEarthquakes.find((earthquake) => earthquake.id === id);
+  newEarthquakes.splice(newEarthquakes.indexOf(earthquake), 1);
   res.status(200).json(newEarthquakes);
 });
-
 
 // create earthquake
 app.post("/earthquake", (req, res) => {
@@ -99,9 +93,8 @@ app.post("/earthquake", (req, res) => {
 
   newEarthquakes.push(newEarthquake);
 
-  res.status(200).json({msg:"new earthquake added",newEarthquake});
+  res.status(200).json({ msg: "new earthquake added", newEarthquake });
 });
-
 
 //Publish api
 const port = 3000;
