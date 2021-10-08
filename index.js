@@ -43,6 +43,20 @@ app.get("/earthquake", (req, res) => {
 });
 
 
+// get earthquake by USGSid
+app.get("/earthquake/:USGSid", (req, res) => {
+  const USGSid = req.params.USGSid;
+
+  for (let earthquake of newEarthquakes) {
+    if (earthquake.USGSid === USGSid) {
+      res.status(200).json(earthquake);
+      return;
+    }
+  }
+
+  res.status(404).send("Earthquake not found");
+});
+
 // get earthquake by id
 app.get("/earthquake/:id", (req, res) => {
   const id = req.params.id;
