@@ -42,7 +42,8 @@
 				"type": "Point",
 				"coordinates": [-27.5986, -60.4025, 10]
 			},
-			"id": "us6000frfw"
+			"USGSid": "us6000frfw",
+			"id": "intdb0001"
 		},
 		{
 			"type": "Feature",
@@ -78,7 +79,8 @@
 				"type": "Point",
 				"coordinates": [174.8945, -21.1036, 535.79]
 			},
-			"id": "us6000fr0b"
+			"USGSid": "us6000fr0b",
+			"id": "intdb0002"
 		},
 		{
 			"type": "Feature",
@@ -114,7 +116,8 @@
 				"type": "Point",
 				"coordinates": [-80.154, 32.944, 6.75]
 			},
-			"id": "se60370971"
+			"USGSid": "se60370971",
+			"id": "intdb0003"
 		},
 		{
 			"type": "Feature",
@@ -150,7 +153,8 @@
 				"type": "Point",
 				"coordinates": [25.2595, 35.2523, 8.71]
 			},
-			"id": "us7000fes8"
+			"USGSid": "us7000fes8",
+			"id": "intdb0004"
 		},
 		{
 			"type": "Feature",
@@ -186,7 +190,8 @@
 				"type": "Point",
 				"coordinates": [120.4353, 13.9491, 89.9]
 			},
-			"id": "us7000fen1"
+			"USGSid": "us7000fen1",
+			"id": "intdb0005"
 		},
 		{
 			"type": "Feature",
@@ -222,7 +227,8 @@
 				"type": "Point",
 				"coordinates": [-87.8542, 12.1598, 30.74]
 			},
-			"id": "us7000fdds"
+			"USGSid": "us7000fdds",
+			"id": "intdb0006"
 		},
 		{
 			"type": "Feature",
@@ -258,7 +264,8 @@
 				"type": "Point",
 				"coordinates": [146.3466, -37.4863, 12]
 			},
-			"id": "us7000fd9v"
+			"USGSid": "us7000fd9v",
+			"id": "intdb0007"
 		},
 		{
 			"type": "Feature",
@@ -294,7 +301,8 @@
 				"type": "Point",
 				"coordinates": [-73.9329, -36.7771, 18.8]
 			},
-			"id": "us7000fd4k"
+			"USGSid": "us7000fd4k",
+			"id": "intdb0008"
 		},
 		{
 			"type": "Feature",
@@ -330,7 +338,8 @@
 				"type": "Point",
 				"coordinates": [-118.2636667, 33.8313333, 11.86]
 			},
-			"id": "ci39812319"
+			"USGSid": "ci39812319",
+			"id": "intdb0009"
 		},
 		{
 			"type": "Feature",
@@ -366,7 +375,8 @@
 				"type": "Point",
 				"coordinates": [105.3742, 29.1942, 7.45]
 			},
-			"id": "us7000fbky"
+			"USGSid": "us7000fbky",
+			"id": "intdb0010"
 		},
 		{
 			"type": "Feature",
@@ -402,7 +412,8 @@
 				"type": "Point",
 				"coordinates": [-146.737, 64.4374, 3.9]
 			},
-			"id": "ak021bt4ffvw"
+			"USGSid": "ak021bt4ffvw",
+			"id": "intdb0011"
 		},
 		{
 			"type": "Feature",
@@ -438,7 +449,8 @@
 				"type": "Point",
 				"coordinates": [-118.8976667, 34.2278333, 2.41]
 			},
-			"id": "ci39807135"
+			"USGSid": "ci39807135",
+			"id": "intdb0012"
 		},
 		{
 			"type": "Feature",
@@ -474,7 +486,8 @@
 				"type": "Point",
 				"coordinates": [-67.0152, -23.8884, 193.38]
 			},
-			"id": "us7000fap8"
+			"USGSid": "us7000fap8",
+			"id": "intdb0013"
 		},
 		{
 			"type": "Feature",
@@ -510,7 +523,8 @@
 				"type": "Point",
 				"coordinates": [-99.7429, 16.9722, 20]
 			},
-			"id": "us7000f93v"
+			"USGSid": "us7000f93v",
+			"id": "intdb0014"
 		}
 	],
 	"bbox": [-146.737, -60.4025, 2.41, 174.8945, 64.4374, 535.79]
